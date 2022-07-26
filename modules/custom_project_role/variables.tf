@@ -1,35 +1,34 @@
 variable "project_id" {
   type    = string
-  default = "nice-unison-356709"
+  description = "Value for Project ID"
 }
 
 variable "org_id" {
   type    = string
-  default = "OrgId"
+  description = "Value for Organization ID"
 }
 
 variable "role_id" {
   type    = string
-  default = "customRole"
+  description  = "Value for Role ID"
 }
 
 variable "role_title" {
   type    = string
-  default = "Title for custom role"
+  default = "Title for the custom role you wish to create"
 }
 
 variable "role_description" {
   type    = string
-  default = "Description for custom role"
+  default = "Description for the custom role"
 }
 
 variable "role_permissions_list" {
   type = list(string)
-  default = ["compute.instances.create",
-  "compute.instances.delete"]
+  description = "List of permissions to be assigned to the custom role"
 }
 
 variable "member" {
   type    = string
-  default = "user:nilamk.negi@gmail.com"
+  description = "User or service account, e.g user:nilamk,negi@gmail.com"
 }

@@ -1,11 +1,15 @@
 provider "google" {
-  credentials = file("credentials.json")
+  credentials = file("testadmin.json")
   project     = var.project_id
   region      = var.region
 }
 
 module "gcp_iam_custom_org_role" {
   source = "../../modules/custom_org_role"
+  project_id = var.project_id
+  role_id = var.role_id
+  org_id = var.org_id
+  member = var.member
   role_permissions_list = [
     "storage.objects.create",
     "cloudkms.cryptoKeyVersions.useToEncrypt",

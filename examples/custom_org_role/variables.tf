@@ -18,6 +18,11 @@ variable "role_title" {
   default = "Custom GCP Role"
 }
 
+variable "org_id" {
+  type    = string
+  default = "OrgId"
+}
+
 variable "role_description" {
   type    = string
   default = "This is a custom role"
@@ -27,4 +32,9 @@ variable "role_permissions_list" {
   type = list(string)
   default = ["compute.instances.create",
   "compute.instances.delete"]
+}
+
+variable "member" {
+  type    = string
+  default = "user:nilamk.negi@gmail.com"
 }

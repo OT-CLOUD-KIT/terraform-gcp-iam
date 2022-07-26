@@ -10,7 +10,12 @@ variable "region" {
 
 variable "role_id" {
   type    = string
-  default = "customRoleId"
+  default = "customRole"
+}
+
+variable "org_id" {
+  type    = string
+  default = "OrgId"
 }
 
 variable "role_title" {
@@ -27,4 +32,9 @@ variable "role_permissions_list" {
   type = list(string)
   default = ["compute.instances.create",
   "compute.instances.delete"]
+}
+
+variable "member" {
+  type    = string
+  default = "user:nilamk.negi@gmail.com"
 }

@@ -4,12 +4,6 @@ resource "google_project_iam_custom_role" "custom-project-role" {
   role_id     = var.role_id
   title       = var.role_title
   description = var.role_description
-  # permissions = [
-  #   "storage.objects.create", 
-  #   "cloudkms.cryptoKeyVersions.useToEncrypt",
-  #   "compute.instances.create",
-  #   "compute.instances.delete"
-  # ]
   permissions = var.role_permissions_list
 }
 

@@ -1,13 +1,13 @@
 provider "google" {
   credentials = file("credentials.json")
-  project     = var.project_id
-  region      = var.region
+  project     = "nice-unison-356709"
+  region      = "us-central1"
 }
 
 module "gcp_service_account" {
   source     = "../../modules/service-account-role"
-  project_id = var.project_id
-  role_id = var.role_id
-  role_permissions_list = var.role_permissions_list
-  member = var.member
+  project_id = "nice-unison-356709"
+  role_permissions = "roles/editor"
+  account_id = "test-service-account-with-role"
+  display_name = "Service Account Test creation"
 }

@@ -1,19 +1,17 @@
 variable "project_id" {
   type = string
-  description = "Project ID value"
+  default   = "nice-unison-356709"
 }
 
-variable "role_id" {
+variable "role_permissions" {
   type = string
-  description = "Role Id"
+  default = "roles/editor" 
 }
 
-variable "role_permissions_list" {
-  type = list(string)
-  description = "List of permissions"
+variable "account_id" {
+  type    = string
 }
 
-variable "member" {
-  type    = list(string)
-  description = "service account email ID e.g serviceAccount:email"
+variable "display_name" {
+  type    = string
 }

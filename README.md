@@ -83,6 +83,7 @@ module "gcp_service_account" {
 
 | Name | Description | Type | Default | Required | Supported |
 |------|-------------|:----:|---------|:--------:|:---------:|
+|project_id| The ID of the project for which the IAM resource is to be configured | string | | yes| |
 
 ### Contributors
 

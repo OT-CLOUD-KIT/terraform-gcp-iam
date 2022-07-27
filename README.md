@@ -38,7 +38,6 @@ provider "google" {
 
 module "gcp_iam_custom_project_role" {
   source     = "../../modules/custom_project_role"
-  org_id     = "OrgId"
   project_id = "nice-unison-356709"
   role_id    = "customRole"
   member     = "user:myuser@gmail.com"

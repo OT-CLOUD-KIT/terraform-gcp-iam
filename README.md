@@ -94,8 +94,8 @@ module "gcp_service_account" {
 
 | Name | Description |
 |------|-------------|
-|Role| Role ID of the custom role created| string | 
-|Permissions| Set of permissions that were assigned to the custom role |
+|Role| ID of the custom role created| string | 
+|Permissions| List of permissions that were assigned to the custom role |
 |Project| Project name to which the assigned resource belongs|
 |ServiceAccount| Account ID of the service account created|
 

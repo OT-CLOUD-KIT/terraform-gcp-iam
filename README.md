@@ -40,7 +40,7 @@ module "gcp_iam_custom_project_role" {
   source     = "../../modules/custom_project_role"
   org_id     = "OrgId"
   project_id = "nice-unison-356709"
-  role_id = "customRole"
+  role_id    = "customRole"
   member     = "user:myuser@gmail.com"
   role_permissions_list = [
     "storage.objects.create",
@@ -52,10 +52,10 @@ module "gcp_iam_custom_project_role" {
 
 # This will assigned a predefinded role to the member user
 module "gcp_iam_assign_project_role" {
-  source = "../../modules/iam_project"
-  role = "roles/compute.networkAdmin"
+  source     = "../../modules/iam_project"
+  role       = "roles/compute.networkAdmin"
   project_id = "myproject"
-  member = "user:myuser@gmail.com"
+  member     = "user:myuser@gmail.com"
 }
 
 # This will create a service account and assign a custom role [composed of the set of permissions] to the service account
@@ -72,11 +72,11 @@ module "gcp_service_account_custom_role" {
 
 # This will create a service account for you and assign a predefined role.
 module "gcp_service_account" {
-  source     = "../../modules/service-account-role"
-  project_id = "myproject"
+  source           = "../../modules/service-account-role"
+  project_id       = "myproject"
   role_permissions = "roles/editor"
-  account_id = "test-service-account-with-role"
-  display_name = "Service Account Test creation"
+  account_id       = "test-service-account-with-role"
+  display_name     = "Service Account Test creation"
 }
 ```
 ## Inputs

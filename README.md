@@ -84,6 +84,7 @@ module "gcp_service_account" {
 | Name | Description | Type | Default | Required | Supported |
 |------|-------------|:----:|---------|:--------:|:---------:|
 |project_id| The ID of the project for which the IAM resource is to be configured | string | | yes| |
+|role| An predefined/basic IAM role to be assigned to the member| string | | yes | |
 
 ### Contributors
 

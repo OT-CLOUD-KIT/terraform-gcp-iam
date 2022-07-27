@@ -5,7 +5,7 @@
   [opstree_homepage]: https://opstree.github.io/
   [opstree_avatar]: https://img.cloudposse.com/150x150/https://github.com/opstree.png
 
-  - This terraform module will create iam resources and assign bind roles 
+  - This terraform module will create iam resources and bind roles 
   - This project is a part of opstree's ot-gcp initiative for terraform modules.
 
 # Overview of GCP IAM

@@ -79,6 +79,11 @@ module "gcp_service_account" {
   display_name = "Service Account Test creation"
 }
 
+## Inputs
+
+| Name | Description | Type | Default | Required | Supported |
+|------|-------------|:----:|---------|:--------:|:---------:|
+|Project_id | The ID of the project for which you iws to configure the IAM resource | string | | yes | |
 
 ### Contributors
 

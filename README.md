@@ -41,7 +41,7 @@ module "gcp_iam_custom_project_role" {
   org_id     = "OrgId"
   project_id = "nice-unison-356709"
   role_id = "customRole"
-  member     = "user:nilamk.negi@gmail.com"
+  member     = "user:myuser@gmail.com"
   role_permissions_list = [
     "storage.objects.create",
     "cloudkms.cryptoKeyVersions.useToEncrypt",
@@ -54,14 +54,14 @@ module "gcp_iam_custom_project_role" {
 module "gcp_iam_assign_project_role" {
   source = "../../modules/iam_project"
   role = "roles/compute.networkAdmin"
-  project_id = "nice-unison-356709"
-  member = "user:nilamk.negi@gmail.com"
+  project_id = "myproject"
+  member = "user:myuser@gmail.com"
 }
 
 # This will create a service account and assign a custom role [composed of the set of permissions] to the service account
 module "gcp_service_account_custom_role" {
   source     = "../../modules/service-account-custom-role"
-  project_id = "nice-unison-356709"
+  project_id = "myproject"
   role_id = "test_service_account_role"
   role_permissions_list = ["compute.disks.create", "compute.firewalls.create", "compute.firewalls.delete", "compute.firewalls.get", "compute.instanceGroupManagers.get", "compute.instances.create", "compute.instances.delete", "compute.instances.get", "compute.instances.setMetadata", "compute.instances.setServiceAccount"]
   role_title = "Test Role"
@@ -73,7 +73,7 @@ module "gcp_service_account_custom_role" {
 # This will create a service account for you and assign a predefined role.
 module "gcp_service_account" {
   source     = "../../modules/service-account-role"
-  project_id = "nice-unison-356709"
+  project_id = "myproject"
   role_permissions = "roles/editor"
   account_id = "test-service-account-with-role"
   display_name = "Service Account Test creation"

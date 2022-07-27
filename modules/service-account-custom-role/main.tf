@@ -12,7 +12,7 @@ resource "google_project_iam_custom_role" "my_service_infra_admin" {
   permissions = var.role_permissions_list
 }
 
-# Bind the role to teh Service account
+# Bind the role to the Service account
 resource "google_project_iam_binding" "my_service_infra_binding" {
   role = "projects/${var.project_id}/roles/${google_project_iam_custom_role.my_service_infra_admin.role_id}"
   members = [

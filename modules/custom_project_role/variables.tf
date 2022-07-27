@@ -3,11 +3,6 @@ variable "project_id" {
   description = "Value for Project ID"
 }
 
-variable "org_id" {
-  type    = string
-  description = "Value for Organization ID"
-}
-
 variable "role_id" {
   type    = string
   description  = "Value for Role ID"

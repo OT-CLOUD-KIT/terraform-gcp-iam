@@ -1,9 +1,9 @@
-output "Role" {
-  value       = module.gcp_service_account.Role
+output "role" {
+  value       = module.gcp_service_account.role
   description = "Details of the project that was assigned role"
 }
 
-output "ServiceAccount" {
-  value       = module.gcp_service_account.ServiceAccount
+output "service-account" {
+  value       = module.gcp_service_account.service-account
   description = "Service ACcount details"
 }

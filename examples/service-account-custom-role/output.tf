@@ -1,18 +1,18 @@
-output "Role" {
-  value       = module.gcp_service_account_custom_role.Role
+output "role" {
+  value       = module.gcp_service_account_custom_role.role
   description = "Details of the project that was assigned role"
 }
 
-output "Permissions" {
-  value       = module.gcp_service_account_custom_role.Permissions
+output "permissions" {
+  value       = module.gcp_service_account_custom_role.permissions
   description = "Details of the project that was assigned role"
 }
 
-output "Project" {
-  value       = module.gcp_service_account_custom_role.Project
+output "project" {
+  value       = module.gcp_service_account_custom_role.project
   description = "Details of the project that was assigned role"
 }
 
-output "ServiceAccount" {
-  value = module.gcp_service_account_custom_role.ServiceAccount
+output "service-account" {
+  value = module.gcp_service_account_custom_role.service-account
 }

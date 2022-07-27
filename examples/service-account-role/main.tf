@@ -5,9 +5,9 @@ provider "google" {
 }
 
 module "gcp_service_account" {
-  source     = "../../modules/service-account-role"
-  project_id = "nice-unison-356709"
+  source           = "../../modules/service-account-role"
+  project_id       = "nice-unison-356709"
   role_permissions = "roles/editor"
-  account_id = "test-service-account-with-role"
-  display_name = "Service Account Test creation"
+  account_id       = "test-service-account-with-role"
+  display_name     = "Service Account Test creation"
 }

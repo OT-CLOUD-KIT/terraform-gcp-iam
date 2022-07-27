@@ -6,9 +6,8 @@ provider "google" {
 
 module "gcp_iam_custom_project_role" {
   source     = "../../modules/custom_project_role"
-  org_id     = "OrgId"
   project_id = "nice-unison-356709"
-  role_id = "customRole"
+  role_id    = "customRole"
   member     = "user:nilamk.negi@gmail.com"
   role_permissions_list = [
     "storage.objects.create",

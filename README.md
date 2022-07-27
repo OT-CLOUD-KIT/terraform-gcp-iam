@@ -85,6 +85,20 @@ module "gcp_service_account" {
 |------|-------------|:----:|---------|:--------:|:---------:|
 |project_id| The ID of the project for which the IAM resource is to be configured | string | | yes| |
 |role| An predefined/basic IAM role to be assigned to the member| string | | yes | |
+|role_permissions_list| Set of permissions to be assigned to the custom role | list(sring) | |yes| |
+|member| Member email id to which the role is to be assigned. This should be in the format user:email or service:email | string | | yes| |
+|account_id| Account ID to be used to create the service account| string| | yes | |
+|display_name| Display name to be assigned to the service account| string | | yes| |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+|Role| Role ID of the custom role created| string | 
+|Permissions| Set of permissions that were assigned to the custom role |
+|Project| Project name to which the assigned resource belongs|
+|ServiceAccount| Account ID of the service account created|
+
 
 ### Contributors
 

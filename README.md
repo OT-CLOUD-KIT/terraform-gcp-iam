@@ -86,6 +86,7 @@ module "gcp_service_account" {
 
 ### Contributors
 
-[![Neelam Negi]][neelam_homepage]<br/>[Neelam Negi][neelam_homepage]
+[![Neelam Negi][neelam_avatar]][neelam_homepage]<br/>[Neelam Negi][neelam_homepage] 
 
-[neelam_homepage]:https://github.com/neeelamnegi
+  [neelam_homepage]: https://github.com/neeelamnegi/
+  [opstree_avatar]: https://img.cloudposse.com/150x150/https://github.com/opstree.png

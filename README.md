@@ -105,4 +105,4 @@ module "gcp_service_account" {
 [![Neelam Negi][neelam_avatar]][neelam_homepage]<br/>[Neelam Negi][neelam_homepage] 
 
   [neelam_homepage]: https://github.com/neeelamnegi/
-  [neelam_avatar]: 
+  [neelam_avatar]: https://img.cloudposse.com/150x150/https://github.com/neeelamnegi.png

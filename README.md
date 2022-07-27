@@ -86,4 +86,6 @@ module "gcp_service_account" {
 
 ### Contributors
 
-  [Neelam Negi]: https://github.com/neeelamnegi
+[![Neelam Negi]][neelam_homepage]<br/>[Neelam Negi][neelam_homepage]
+
+[neelam_homepage]:https://github.com/neeelamnegi

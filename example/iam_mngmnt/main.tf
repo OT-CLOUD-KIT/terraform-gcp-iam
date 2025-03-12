@@ -1,10 +1,3 @@
-# resource "google_project_iam_member" "iam_roles" {
-#   for_each = var.create_iam_roles ? var.iam_roles : {}
-#   project  = var.project_id
-#   role     = each.key
-#   member   = each.value
-# }
-
 resource "google_project_iam_member" "iam_roles" {
   for_each = var.create_iam_roles ? merge([
     for role, members in var.iam_roles : {

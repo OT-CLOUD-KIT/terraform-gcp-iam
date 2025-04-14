@@ -17,7 +17,7 @@ Here, we are creating reusable modules to manage IAM roles (predefined and custo
 
 | Name                                              | Version  |
 |---------------------------------------------------|----------|
-| <a name="provider_gcp"></a> [gcp](#provider\_gcp) | 5.6   |
+| <a name="provider_gcp"></a> [gcp](#provider\_gcp) | 5.0   |
 
 ## Usage
 

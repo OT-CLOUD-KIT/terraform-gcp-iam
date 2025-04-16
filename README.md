@@ -1,107 +1,102 @@
-# GCP IAM
+## Terraform GCP IAM
 
 [![Opstree Solutions][opstree_avatar]][opstree_homepage]<br/>[Opstree Solutions][opstree_homepage] 
 
   [opstree_homepage]: https://opstree.github.io/
   [opstree_avatar]: https://img.cloudposse.com/150x150/https://github.com/opstree.png
 
-  - This terraform module will create iam resources and bind roles 
-  - This project is a part of opstree's ot-gcp initiative for terraform modules.
+This Terraform code defines modules to manage Google Cloud IAM (Identity and Access Management). IAM in GCP is used to control who (users) has what access (roles/permissions) to which resources.
+Here, we are creating reusable modules to manage IAM roles (predefined and custom) and service accounts along with their role bindings.
 
-# Overview of GCP IAM
-  IAM lets you grant granular access to specific Google Cloud resources and helps prevent access to other resources. IAM lets you adopt the security principle of least privilege, which states that nobody should have more permissions than they actually need.
-  With IAM, you manage access control by defining who (identity) has what access (role) for which resource. For example, Compute Engine virtual machine instances, Google Kubernetes Engine (GKE) clusters, and Cloud Storage buckets are all Google Cloud resources. The organizations, folders, and projects that you use to organize your resources are also resources.
-  In IAM, permission to access a resource isn't granted directly to the end user. Instead, permissions are grouped into roles, and roles are granted to authenticated principals. 
+## Architecture
+
+<img width="6000" length="8000" alt="Terraform" src="https://github.com/user-attachments/assets/26c523f3-290d-4be9-bc8b-39fbca89478b">
+
+
+## Providers
+
+| Name                                              | Version  |
+|---------------------------------------------------|----------|
+| <a name="provider_gcp"></a> [gcp](#provider\_gcp) | 5.0   |
 
 ## Usage
 
-```
-terraform {
-  required_providers {
-    google = {
-      version = "~> 4.19.0"
-    }
+```hcl
+module "iam_mngmnt" {
+  source              = "./modules/iam_mngmnt"
+  project_id          = var.project_id
+  create_iam_roles    = var.create_iam_roles
+  iam_roles           = var.iam_roles
+  create_custom_roles = var.create_custom_roles
+  custom_roles        = var.custom_roles
+}
+
+module "service_account_mngmnt" {
+  source           = "./modules/service_account_mngmnt"
+  project_id       = var.project_id
+  service_accounts = var.service_accounts
+  use_custom_roles = var.use_custom_roles
+}
+
+# Variable values
+
+region  = "us-central1"
+project_id = "nw-opstree-dev-landing-zone"
+
+create_iam_roles = false
+
+iam_roles = {
+  "roles/editor" = ["user:xyz@gmail.com"]
+  "roles/viewer" = ["user:xyz@gmail.com"]
+}
+
+create_custom_roles = false
+
+custom_roles = {
+  custom_admin = {
+    role_id     = "customAdmin"
+    title       = "Custom Admin Role"
+    description = "A custom role with admin-like permissions"
+    permissions = [
+      "iam.roles.get",
+      "iam.roles.list",
+      "storage.buckets.get"
+    ]
+    member = "user:xyz@gmail.com"
   }
-  required_version = "~>1.1.3"
 }
 
-# Configure the GCP Provider
+use_custom_roles = false
 
-provider "google" {
-  credentials = file("<service_account_key_json/p12_file")
-  project     = "<project-id>"
-  region      = "<region>"
+service_accounts = {
+  "sa-billing" = {
+    display_name = "Billing Service Account"
+    role         = "customAdmin"
+  }
+  "sa-logging" = {
+    display_name = "Logging Service Account"
+    role         = "roles/logging.viewer"
+  }
 }
 
-# Basic use of this module:
-# This will assign a custom role to a user with permissions listed in role_permissions_list[]
-
-module "gcp_iam_custom_project_role" {
-  source     = "../../modules/custom_project_role"
-  project_id = "nice-unison-356709"
-  role_id    = "customRole"
-  member     = "user:myuser@gmail.com"
-  role_permissions_list = [
-    "storage.objects.create",
-    "cloudkms.cryptoKeyVersions.useToEncrypt",
-    "compute.instances.create",
-    "compute.instances.delete"
-  ]
-}
-
-# This will assigned a predefinded role to the member user
-module "gcp_iam_assign_project_role" {
-  source     = "../../modules/iam_project"
-  role       = "roles/compute.networkAdmin"
-  project_id = "myproject"
-  member     = "user:myuser@gmail.com"
-}
-
-# This will create a service account and assign a custom role [composed of the set of permissions] to the service account
-module "gcp_service_account_custom_role" {
-  source                = "../../modules/service-account-custom-role"
-  project_id            = "nice-unison-356709"
-  role_id               = "test_service_account_role"
-  role_permissions_list = ["compute.disks.create", "compute.firewalls.create", "compute.firewalls.delete", "compute.firewalls.get", "compute.instanceGroupManagers.get", "compute.instances.create", "compute.instances.delete", "compute.instances.get", "compute.instances.setMetadata", "compute.instances.setServiceAccount", "compute.instances.setTags", "compute.machineTypes.get", "compute.networks.create", "compute.networks.delete", "compute.networks.get", "compute.networks.updatePolicy", "compute.subnetworks.create", "compute.subnetworks.delete", "compute.subnetworks.get", "compute.subnetworks.setPrivateIpGoogleAccess", "compute.subnetworks.update", "compute.subnetworks.use", "compute.subnetworks.useExternalIp", "compute.zones.get", "container.clusters.create", "container.clusters.delete", "container.clusters.get", "container.clusters.update", "container.operations.get"]
-  role_title            = "Test Role"
-  role_description      = "Custom role for service account"
-  account_id            = "test-service-account"
-  display_name          = "Service Account Test creation"
-}
-
-# This will create a service account for you and assign a predefined role.
-module "gcp_service_account" {
-  source           = "../../modules/service-account-role"
-  project_id       = "myproject"
-  role_permissions = "roles/editor"
-  account_id       = "test-service-account-with-role"
-  display_name     = "Service Account Test creation"
-}
 ```
+
 ## Inputs
 
-| Name | Description | Type | Default | Required | Supported |
-|------|-------------|:----:|---------|:--------:|:---------:|
-|project_id| The ID of the project for which the IAM resource is to be configured | string | | yes| |
-|role| An predefined/basic IAM role to be assigned to the member| string | | yes | |
-|role_permissions_list| Set of permissions to be assigned to the custom role | list(string) | |yes| |
-|member| Member email id to which the role is to be assigned. This should be in the format user:email or serviceAccount:email | string | | yes| |
-|account_id| Account ID to be used to create the service account| string| | yes | |
-|display_name| Display name to be assigned to the service account| string | | yes| |
+| Name | Description | Type | Default | Required | 
+|------|-------------|:----:|---------|:--------:|
+|**project_id**| The ID of the project for which the IAM resource is to be configured | string |{ } | yes| 
+|**create_iam_roles**| Set to true to create default IAM roles| bool |false | yes | 
+|**iam_roles**| Map of default IAM roles and members | map(list(string)) | [ ] |yes| 
+|**create_custom_roles**| Map of custom roles with permissions and assignees | bool | false | yes| 
+| **custom_roles** | Map of custom roles with permissions and assignees | map(object) | { } | yes|
+|**use_custom_roles**| Set to true to assign custom roles to service accounts| bool|false | yes | 
+|**service_accounts**| Map of service accounts and their assigned roles| string | { } | yes| 
 
 ## Outputs
-
 | Name | Description |
 |------|-------------|
-|role| ID of the custom role created| string | 
-|permissions| List of permissions that were assigned to the custom role |
-|project| Project name to which the assigned resource belongs|
-|service-account| Email ID of the service account created|
-
-
-### Contributors
-
-[![Neelam Negi][neelam_avatar]][neelam_homepage]<br/>[Neelam Negi][neelam_homepage] 
-
-  [neelam_homepage]: https://github.com/neeelamnegi/
-  [neelam_avatar]: https://img.cloudposse.com/150x150/https://github.com/neeelamnegi.png
+|**iam_roles_assigned**| List of default IAM roles assigned| 
+|**custom_roles_created**| List of custom IAM roles created |
+|**service_accounts_created**| List of service accounts created|
+                                                                                                                  

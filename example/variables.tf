@@ -1,5 +1,5 @@
 variable "region" {
-  description = "Region where projects and folders will be created."
+  description = "The default project ID where resources will be created"
   type        = string
 }
 
